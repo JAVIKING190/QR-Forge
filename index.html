@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Crea códigos QR con tu estilo. Gratis, open source y sin subir tus datos a servidores.">
+  <meta name="theme-color" content="#101112">
+  <title>QR Forge — Crea. Personaliza. Comparte.</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./vendor/qr-code-styling-1.9.2.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="QR Forge, inicio"><span class="brand-mark" aria-hidden="true">▦</span> QR <strong>FORGE</strong><span class="version">01</span></a>
+    <nav aria-label="Enlaces principales">
+      <a class="source-link" href="https://github.com/JAVIKING190/QR-Forge" target="_blank" rel="noopener noreferrer">Código abierto ↗</a>
+      <button id="theme" class="icon-button" type="button" aria-label="Cambiar a tema claro">☀</button>
+    </nav>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow"><span class="live-dot"></span> TU IDEA, LISTA PARA ESCANEAR</p><h1>Pequeño código.<br><span>Grandes posibilidades.</span></h1><p class="intro-copy">Crea un QR que se sienta tuyo. Sin cuentas, sin anuncios, sin complicaciones.</p></div>
+      <div class="intro-note"><span aria-hidden="true">↙</span> Hecho en tu navegador.<br>Tus datos se quedan contigo.</div>
+    </section>
+    <div class="workspace">
+      <div class="editor">
+        <section class="panel" aria-labelledby="content-title">
+          <div class="section-heading"><span class="step">01</span><h2 id="content-title">Dale un destino</h2><span class="section-note">Contenido</span></div>
+          <div id="types" class="type-grid" role="group" aria-label="Tipo de código QR"></div>
+          <form id="content-form" novalidate><div id="fields"></div></form>
+          <p id="content-error" class="error" role="alert" hidden></p>
+        </section>
+        <section class="panel" aria-labelledby="design-title">
+          <div class="section-heading"><span class="step">02</span><h2 id="design-title">Hazlo tuyo</h2><span class="section-note">Diseño</span></div>
+          <p class="field-caption">Un punto de partida</p><div id="presets" class="presets" role="group" aria-label="Diseños preestablecidos"></div>
+          <div class="control-grid colors">
+            <label>Color principal<div class="color-input"><input id="foreground" type="color" value="#18232b"><span id="foreground-hex">#18232B</span></div></label>
+            <label>Fondo<div class="color-input"><input id="background" type="color" value="#ffffff"><span id="background-hex">#FFFFFF</span></div></label>
+          </div>
+          <div class="control-grid">
+            <label>Forma de los puntos<select id="dots"><option value="rounded">Redondeados</option><option value="square">Cuadrados</option><option value="dots">Círculos</option><option value="extra-rounded">Muy redondeados</option><option value="classy">Elegantes</option><option value="classy-rounded">Elegantes redondos</option></select></label>
+            <label>Forma de las esquinas<select id="corners"><option value="extra-rounded">Redondeadas</option><option value="square">Cuadradas</option><option value="dot">Circulares</option></select></label>
+          </div>
+          <div class="switch-row"><label for="gradient">Degradado</label><input id="gradient" type="checkbox" role="switch"></div>
+          <div id="gradient-controls" class="control-grid" hidden>
+            <label>Segundo color<div class="color-input"><input id="secondary" type="color" value="#2457c6"><span id="secondary-hex">#2457C6</span></div></label>
+            <label>Tipo de degradado<select id="gradient-type"><option value="linear">Lineal ↘</option><option value="radial">Radial ◉</option></select></label>
+          </div>
+          <div class="switch-row"><label for="transparent">Fondo transparente</label><input id="transparent" type="checkbox" role="switch"></div>
+          <details class="advanced"><summary>Ajustes avanzados <span>＋</span></summary><div class="control-grid">
+            <label>Corrección de errores<select id="correction"><option value="H">Alta · H (≈30%)</option><option value="Q">Media alta · Q (≈25%)</option><option value="M">Media · M (≈15%)</option><option value="L">Baja · L (≈7%)</option></select></label>
+            <label>Margen exterior<select id="margin"><option value="0.15">Seguro · 15%</option><option value="0.18">Amplio · 18%</option><option value="0.22">Extra · 22%</option></select></label>
+          </div><p class="help">El margen libre ayuda al escáner. La corrección permite recuperar daños en los datos; no garantiza tolerancia a un logo de ese tamaño.</p></details>
+        </section>
+        <section class="panel" aria-labelledby="logo-title">
+          <div class="section-heading"><span class="step">03</span><h2 id="logo-title">Tu toque personal</h2><span class="section-note">Logo opcional</span></div>
+          <label class="upload-zone" for="logo"><span aria-hidden="true">＋</span><strong id="logo-label">Añade tu logo</strong><small>PNG, JPG o WebP · hasta 2 MB · se procesa aquí</small></label>
+          <input id="logo" class="file-input" type="file" accept="image/png,image/jpeg,image/webp">
+          <div id="logo-controls" class="logo-controls" hidden><label>Tamaño del logo <input id="logo-size" type="range" min="0.15" max="0.3" step="0.01" value="0.2"></label><button id="remove-logo" class="text-button" type="button">Quitar logo</button></div>
+          <p id="logo-error" class="error" role="alert" hidden></p>
+        </section>
+        <div class="editor-actions"><button id="save-design" class="secondary-button" type="button">Guardar mi diseño</button><button id="restore-design" class="text-button" type="button">Recuperar</button><button id="reset" class="text-button" type="button">Restablecer</button></div>
+        <p class="help save-note">Solo se guarda el estilo en este navegador. El contenido y el logo no se guardan.</p>
+      </div>
+      <aside class="preview-column" aria-labelledby="preview-title">
+        <section class="preview-panel">
+          <div class="preview-heading"><h2 id="preview-title">Tu próximo QR</h2><span class="preview-badge">EN VIVO</span></div>
+          <div class="preview-stage"><div id="qr-wrap"><div id="qr" role="img" aria-label="Vista previa del código QR"></div></div></div>
+          <div class="preview-meta"><span id="type-name">Enlace web</span><span id="size-label">1024 × 1024 px</span></div>
+          <div id="design-status" class="design-status" role="status"><span id="status-icon" aria-hidden="true">✓</span><div><strong id="status-title">Buen contraste</strong><p id="status-detail">Prueba el QR con tu cámara antes de compartirlo.</p></div></div>
+          <div class="export-controls"><label>Formato<select id="format"><option value="png">PNG · imagen</option><option value="svg">SVG · vector</option><option value="webp">WebP · ligero</option><option value="jpeg">JPG · imagen</option></select></label><label>Resolución<select id="resolution"><option value="512">512 px</option><option value="1024" selected>1024 px</option><option value="2048">2048 px</option></select></label></div>
+          <button id="download" class="download-button" type="button"><span>Descargar QR</span><span aria-hidden="true">↓</span></button>
+          <p class="export-note" id="export-note">Listo para guardar y compartir. Sin marcas de agua.</p>
+        </section>
+        <p class="privacy-note"><span aria-hidden="true">◈</span> Sin servidores de generación ni seguimiento.<br>El QR conserva el contenido que escribas.</p>
+      </aside>
+    </div>
+    <section class="bottom-notes" aria-label="Acerca de QR Forge"><div><span>01 / LIBRE</span><h3>Tuyo, de verdad.</h3><p>Código abierto con licencia MIT. Úsalo, compártelo o dale tu propia forma.</p></div><div><span>02 / DIRECTO</span><h3>Un escaneo. Un destino.</h3><p>QR estáticos sin intermediarios. Si cambia el contenido, crea un nuevo código.</p></div><div><span>03 / LOCAL</span><h3>Privacidad por diseño.</h3><p>Ni tu contraseña Wi-Fi ni tu logo necesitan salir de tu navegador para crear el QR.</p></div></section>
+  </main>
+  <footer><a class="brand footer-brand" href="./">QR <strong>FORGE</strong></a><span>Creado para conectar ideas.</span><a href="https://github.com/JAVIKING190/QR-Forge" target="_blank" rel="noopener noreferrer">Hecho por JAVIKING190 ↗</a></footer>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>
